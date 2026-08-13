@@ -1,6 +1,13 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar() {
+    const [menuOpen, setMenuOpen] = useState(false);
+
+    function closeMenu() {
+        setMenuOpen(false);
+    }
+
     return (
         <header className="site-header">
             <nav
@@ -10,17 +17,42 @@ function Navbar() {
                 <NavLink
                     to="/"
                     className="brand"
+                    onClick={closeMenu}
                 >
                     Can I Afford This?
                 </NavLink>
 
-                <div className="nav-links">
+                <button
+                    className="mobile-menu-button"
+                    type="button"
+                    aria-label="Toggle navigation menu"
+                    aria-expanded={menuOpen}
+                    aria-controls="primary-navigation-links"
+                    onClick={() =>
+                        setMenuOpen(
+                            (currentState) =>
+                                !currentState
+                        )
+                    }
+                >
+                    <span />
+                    <span />
+                    <span />
+                </button>
+
+                <div
+                    id="primary-navigation-links"
+                    className={`nav-links ${
+                        menuOpen ? "nav-links-open" : ""
+                    }`}
+                >
                     <NavLink
                         to="/"
                         end
                         className={({ isActive }) =>
                             isActive ? "active" : ""
                         }
+                        onClick={closeMenu}
                     >
                         Home
                     </NavLink>
@@ -30,6 +62,7 @@ function Navbar() {
                         className={({ isActive }) =>
                             isActive ? "active" : ""
                         }
+                        onClick={closeMenu}
                     >
                         Calculator
                     </NavLink>
@@ -39,6 +72,7 @@ function Navbar() {
                         className={({ isActive }) =>
                             isActive ? "active" : ""
                         }
+                        onClick={closeMenu}
                     >
                         FAQ
                     </NavLink>
@@ -48,6 +82,7 @@ function Navbar() {
                         className={({ isActive }) =>
                             isActive ? "active" : ""
                         }
+                        onClick={closeMenu}
                     >
                         About
                     </NavLink>
@@ -57,6 +92,7 @@ function Navbar() {
                         className={({ isActive }) =>
                             isActive ? "active" : ""
                         }
+                        onClick={closeMenu}
                     >
                         Contact
                     </NavLink>
