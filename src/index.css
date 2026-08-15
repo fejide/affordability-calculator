@@ -286,9 +286,6 @@ main {
     width: 32px;
   }
 
-  .nav-links-open+* {
-    pointer-events: none;
-  }
 
   .mobile-menu-button[aria-expanded="true"] span:nth-child(1) {
     transform: translateY(7px) rotate(45deg);
