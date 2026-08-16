@@ -35,6 +35,78 @@ function HomePage() {
           </Link>
         </div>
       </section>
+
+      <section
+        className="how-it-works-section"
+        aria-labelledby="how-it-works-title"
+      >
+        <div className="how-it-works-header">
+          <p className="section-eyebrow">
+            How It Works
+          </p>
+
+          <h2 id="how-it-works-title">
+            Look beyond the price tag.
+          </h2>
+
+          <p className="section-description">
+            The calculator evaluates a purchase through
+            multiple financial guardrails instead of relying
+            on a simple bank-balance check.
+          </p>
+        </div>
+
+        <div className="how-it-works-grid">
+          <article className="how-it-works-card">
+            <p className="step-number">
+              01
+            </p>
+
+            <h3>
+              Protect your emergency fund.
+            </h3>
+
+            <p>
+              See whether the purchase would leave enough
+              liquid savings to cover several months of
+              your recorded baseline expenses.
+            </p>
+          </article>
+
+          <article className="how-it-works-card">
+            <p className="step-number">
+              02
+            </p>
+
+            <h3>
+              Check your monthly budget.
+            </h3>
+
+            <p>
+              Compare the purchase against your income,
+              expenses, and discretionary spending capacity
+              to see whether it fits without disrupting
+              your financial priorities.
+            </p>
+          </article>
+
+          <article className="how-it-works-card">
+            <p className="step-number">
+              03
+            </p>
+
+            <h3>
+              Understand the opportunity cost.
+            </h3>
+
+            <p>
+              See what the same money could potentially
+              become over time if it were invested instead
+              of spent today.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }
