@@ -107,6 +107,80 @@ function HomePage() {
           </article>
         </div>
       </section>
+
+      <section
+        className="benefits-section"
+        aria-labelledby="benefits-title"
+      >
+        <div className="benefits-header">
+          <p className="section-eyebrow">
+            Why This Matters
+          </p>
+
+          <h2 id="benefits-title">
+            A purchase can fit your bank account
+            and still hurt your financial plan.
+          </h2>
+
+          <p className="section-description">
+            Affordability is about more than having enough
+            money available today. The calculator helps you
+            understand how a purchase affects both your
+            current stability and your future options.
+          </p>
+        </div>
+
+        <div className="benefits-grid">
+          <article className="benefit-card">
+            <p className="benefit-label">
+              Better Context
+            </p>
+
+            <h3>
+              Make decisions using your full financial picture.
+            </h3>
+
+            <p>
+              Consider your income, recurring expenses,
+              savings, and other priorities together instead
+              of judging a purchase only by your current
+              account balance.
+            </p>
+          </article>
+
+          <article className="benefit-card">
+            <p className="benefit-label">
+              More Stability
+            </p>
+
+            <h3>
+              Avoid sacrificing your financial safety net.
+            </h3>
+
+            <p>
+              Understand whether a purchase would weaken
+              the emergency savings you rely on for
+              unexpected costs or changes in income.
+            </p>
+          </article>
+
+          <article className="benefit-card">
+            <p className="benefit-label">
+              Long-Term Awareness
+            </p>
+
+            <h3>
+              See the tradeoff before you spend.
+            </h3>
+
+            <p>
+              Compare the immediate purchase with the
+              potential long-term value of keeping or
+              investing the same money instead.
+            </p>
+          </article>
+        </div>
+      </section>
     </main>
   );
 }
