@@ -181,6 +181,31 @@ function HomePage() {
           </article>
         </div>
       </section>
+
+      <section className="final-cta-section">
+        <div className="final-cta-content">
+          <p className="section-eyebrow">
+            Make a Smarter Decision
+          </p>
+
+          <h2>
+            Ready to see what you can truly afford?
+          </h2>
+
+          <p className="final-cta-description">
+            Evaluate your purchase using your complete financial
+            picture—not just the money available in your account
+            today.
+          </p>
+
+          <Link
+            to="/calculator"
+            className="primary-button"
+          >
+            Check Affordability
+          </Link>
+        </div>
+      </section>
     </main>
   );
 }
