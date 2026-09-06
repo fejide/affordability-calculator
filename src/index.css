@@ -983,3 +983,265 @@ main {
     font-size: 1rem;
   }
 }
+
+/* =========================================================
+   CALCULATOR PAGE
+========================================================= */
+
+.calculator-page {
+  width: 100%;
+
+  padding: 64px 32px 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background:
+    radial-gradient(circle at 50% 12%,
+      rgba(0, 113, 227, 0.08),
+      transparent 28%),
+    #f5f5f7;
+}
+
+.calculator-hero {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+  padding: 96px 0 88px;
+
+  text-align: center;
+}
+
+.calculator-hero h1 {
+  max-width: 900px;
+
+  margin: 0 auto;
+
+  color: #1d1d1f;
+
+  font-size: clamp(3.25rem, 7vw, 6rem);
+  font-weight: 800;
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+.calculator-hero h1 span {
+  display: block;
+
+  color: #0071e3;
+}
+
+.calculator-description {
+  max-width: 760px;
+
+  margin: 28px auto 0;
+
+  color: #6e6e73;
+
+  font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+  line-height: 1.6;
+}
+
+/* =========================================================
+   CALCULATOR WORKSPACE
+========================================================= */
+
+.calculator-workspace {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 40px 0 0;
+}
+
+.calculator-workspace-header {
+  max-width: 820px;
+
+  margin: 0 auto 56px;
+
+  text-align: center;
+}
+
+.calculator-workspace-header h2 {
+  margin: 0;
+
+  color: #1d1d1f;
+
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.calculator-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.calculator-panel {
+  min-height: 300px;
+
+  padding: 36px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  text-align: left;
+
+  background:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(247, 247, 249, 0.94));
+
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 28px;
+
+  box-shadow:
+    0 18px 50px rgba(0, 0, 0, 0.055);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.calculator-panel:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-panel-label {
+  margin-bottom: 36px;
+
+  color: #0071e3;
+
+  font-size: 0.88rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.calculator-panel h3 {
+  margin-bottom: 16px;
+
+  color: #1d1d1f;
+
+  font-size: 1.7rem;
+  font-weight: 750;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.calculator-panel p:last-child {
+  margin: 0;
+
+  color: #6e6e73;
+
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* Make the future result panel visually distinct */
+
+.calculator-panel:last-child {
+  color: #ffffff;
+
+  background:
+    radial-gradient(circle at 50% 100%,
+      rgba(0, 113, 227, 0.32),
+      transparent 58%),
+    linear-gradient(145deg,
+      #1e2733,
+      #111821);
+
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.calculator-panel:last-child .calculator-panel-label {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.calculator-panel:last-child h3 {
+  color: #ffffff;
+}
+
+.calculator-panel:last-child p:last-child {
+  color: rgba(255, 255, 255, 0.68);
+}
+
+/* =========================================================
+   CALCULATOR PAGE — TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .calculator-page {
+    padding: 64px 24px 96px;
+  }
+
+  .calculator-hero {
+    padding: 80px 0 72px;
+  }
+
+  .calculator-workspace-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calculator-panel {
+    min-height: 0;
+  }
+}
+
+/* =========================================================
+   CALCULATOR PAGE — MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .calculator-page {
+    padding: 64px 20px 80px;
+  }
+
+  .calculator-hero {
+    padding: 64px 0 56px;
+  }
+
+  .calculator-hero h1 {
+    font-size: clamp(2.8rem, 13vw, 4.3rem);
+  }
+
+  .calculator-description {
+    margin-top: 24px;
+
+    font-size: 1rem;
+  }
+
+  .calculator-workspace {
+    padding-top: 24px;
+  }
+
+  .calculator-workspace-header {
+    margin-bottom: 40px;
+  }
+
+  .calculator-workspace-header h2 {
+    font-size: clamp(2.35rem, 11vw, 3.5rem);
+  }
+
+  .calculator-panel {
+    padding: 28px;
+
+    border-radius: 24px;
+  }
+
+  .calculator-panel-label {
+    margin-bottom: 28px;
+  }
+
+  .calculator-panel h3 {
+    font-size: 1.45rem;
+  }
+}
