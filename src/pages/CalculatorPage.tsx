@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 function CalculatorPage() {
+  const [purchaseName, setPurchaseName] = useState("");
+  const [purchasePrice, setPurchasePrice] = useState("");
+
   return (
     <main className="calculator-page">
       <section className="calculator-hero">
@@ -49,9 +54,51 @@ function CalculatorPage() {
               What are you considering buying?
             </h3>
 
-            <p>
-              Purchase details will go here.
+            <p className="calculator-panel-description">
+              Start with the item and the amount you would need to spend.
             </p>
+
+            <div className="calculator-form">
+              <div className="calculator-form-field">
+                <label htmlFor="purchase-name">
+                  Purchase name
+                </label>
+
+                <input
+                  id="purchase-name"
+                  type="text"
+                  value={purchaseName}
+                  onChange={(event) =>
+                    setPurchaseName(event.target.value)
+                  }
+                  placeholder="Example: MacBook Pro"
+                  autoComplete="off"
+                />
+              </div>
+
+              <div className="calculator-form-field">
+                <label htmlFor="purchase-price">
+                  Purchase price
+                </label>
+
+                <div className="currency-input">
+                  <span aria-hidden="true">$</span>
+
+                  <input
+                    id="purchase-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputMode="decimal"
+                    value={purchasePrice}
+                    onChange={(event) =>
+                      setPurchasePrice(event.target.value)
+                    }
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+            </div>
           </section>
 
           <section className="calculator-panel">
