@@ -4,6 +4,9 @@ function CalculatorPage() {
   const [purchaseName, setPurchaseName] = useState("");
   const [purchasePrice, setPurchasePrice] = useState("");
 
+  const [monthlyIncome, setMonthlyIncome] = useState("");
+  const [monthlyExpenses, setMonthlyExpenses] = useState("");
+
   return (
     <main className="calculator-page">
       <section className="calculator-hero">
@@ -110,9 +113,57 @@ function CalculatorPage() {
               What does your monthly cash flow look like?
             </h3>
 
-            <p>
-              Income and expense inputs will go here.
+            <p className="calculator-panel-description">
+              Add your monthly take-home income and recurring expenses.
             </p>
+
+            <div className="calculator-form">
+              <div className="calculator-form-field">
+                <label htmlFor="monthly-income">
+                  Monthly income
+                </label>
+
+                <div className="currency-input">
+                  <span aria-hidden="true">$</span>
+
+                  <input
+                    id="monthly-income"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputMode="decimal"
+                    value={monthlyIncome}
+                    onChange={(event) =>
+                      setMonthlyIncome(event.target.value)
+                    }
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+
+              <div className="calculator-form-field">
+                <label htmlFor="monthly-expenses">
+                  Monthly expenses
+                </label>
+
+                <div className="currency-input">
+                  <span aria-hidden="true">$</span>
+
+                  <input
+                    id="monthly-expenses"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputMode="decimal"
+                    value={monthlyExpenses}
+                    onChange={(event) =>
+                      setMonthlyExpenses(event.target.value)
+                    }
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+            </div>
           </section>
 
           <section className="calculator-panel">
