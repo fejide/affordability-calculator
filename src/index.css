@@ -1384,3 +1384,62 @@ main {
     font-size: 1rem;
   }
 }
+
+/* =========================================================
+   MONTHLY CASH-FLOW SUMMARY
+========================================================= */
+
+.cash-flow-summary {
+  width: 100%;
+
+  margin-top: 28px;
+  padding-top: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.cash-flow-summary-label {
+  margin: 0 0 4px;
+
+  color: #1d1d1f;
+
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.cash-flow-summary-detail {
+  margin: 0;
+
+  color: #86868b;
+
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.cash-flow-summary strong {
+  font-size: 1.35rem;
+  font-weight: 750;
+  white-space: nowrap;
+}
+
+.cash-flow-positive {
+  color: #1d1d1f;
+}
+
+.cash-flow-negative {
+  color: #b42318;
+}
+
+@media (max-width: 600px) {
+  .cash-flow-summary {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 10px;
+  }
+}

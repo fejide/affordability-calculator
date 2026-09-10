@@ -7,6 +7,17 @@ function CalculatorPage() {
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [monthlyExpenses, setMonthlyExpenses] = useState("");
 
+  const monthlyRemaining =
+    Number(monthlyIncome || 0) -
+    Number(monthlyExpenses || 0);
+
+  function formatCurrency(amount: number) {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(amount);
+  }
+
   return (
     <main className="calculator-page">
       <section className="calculator-hero">
@@ -163,6 +174,28 @@ function CalculatorPage() {
                   />
                 </div>
               </div>
+            </div>
+
+            <div className="cash-flow-summary">
+              <div>
+                <p className="cash-flow-summary-label">
+                  Monthly Remaining
+                </p>
+
+                <p className="cash-flow-summary-detail">
+                  Income minus recurring expenses
+                </p>
+              </div>
+
+              <strong
+                className={
+                  monthlyRemaining < 0
+                    ? "cash-flow-negative"
+                    : "cash-flow-positive"
+                }
+              >
+                {formatCurrency(monthlyRemaining)}
+              </strong>
             </div>
           </section>
 
