@@ -7,6 +7,10 @@ function CalculatorPage() {
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [monthlyExpenses, setMonthlyExpenses] = useState("");
 
+  const [currentSavings, setCurrentSavings] = useState("");
+  const [emergencyFundMonths, setEmergencyFundMonths] =
+    useState("6");
+
   const monthlyRemaining =
     Number(monthlyIncome || 0) -
     Number(monthlyExpenses || 0);
@@ -208,9 +212,54 @@ function CalculatorPage() {
               What financial cushion do you have?
             </h3>
 
-            <p>
-              Savings and emergency-fund inputs will go here.
+            <p className="calculator-panel-description">
+              Add your current liquid savings and choose how many
+              months of expenses you want to protect.
             </p>
+
+            <div className="calculator-form">
+              <div className="calculator-form-field">
+                <label htmlFor="current-savings">
+                  Current savings
+                </label>
+
+                <div className="currency-input">
+                  <span aria-hidden="true">$</span>
+
+                  <input
+                    id="current-savings"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    inputMode="decimal"
+                    value={currentSavings}
+                    onChange={(event) =>
+                      setCurrentSavings(event.target.value)
+                    }
+                    placeholder="0.00"
+                  />
+                </div>
+              </div>
+
+              <div className="calculator-form-field">
+                <label htmlFor="emergency-fund-months">
+                  Emergency fund target
+                </label>
+
+                <select
+                  id="emergency-fund-months"
+                  value={emergencyFundMonths}
+                  onChange={(event) =>
+                    setEmergencyFundMonths(event.target.value)
+                  }
+                >
+                  <option value="3">3 months</option>
+                  <option value="4">4 months</option>
+                  <option value="5">5 months</option>
+                  <option value="6">6 months</option>
+                </select>
+              </div>
+            </div>
           </section>
 
           <section className="calculator-panel">
