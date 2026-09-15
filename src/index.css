@@ -1443,3 +1443,48 @@ main {
     gap: 10px;
   }
 }
+
+/* ========================================
+   Calculator - Savings & Emergency Fund
+======================================== */
+
+.calculator-form-field select {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+
+  border: 1px solid rgba(15, 23, 42, 0.14);
+  border-radius: 14px;
+
+  background-color: rgba(255, 255, 255, 0.72);
+
+  color: #1f2937;
+  font: inherit;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.calculator-form-field select:hover {
+  border-color: rgba(37, 99, 235, 0.3);
+}
+
+.calculator-form-field select:focus {
+  outline: none;
+
+  border-color: #2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37, 99, 235, 0.12);
+
+  background-color: #ffffff;
+}
+
+.calculator-form-field select:focus-visible {
+  outline: none;
+}
