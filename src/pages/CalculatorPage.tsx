@@ -15,6 +15,14 @@ function CalculatorPage() {
     Number(monthlyIncome || 0) -
     Number(monthlyExpenses || 0);
 
+  const emergencyFundRequired =
+    Number(monthlyExpenses || 0) *
+    Number(emergencyFundMonths);
+
+  const emergencyFundDifference =
+    Number(currentSavings || 0) -
+    emergencyFundRequired;
+
   function formatCurrency(amount: number) {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -258,6 +266,46 @@ function CalculatorPage() {
                   <option value="5">5 months</option>
                   <option value="6">6 months</option>
                 </select>
+              </div>
+            </div>
+
+            <div className="emergency-fund-summary">
+              <div className="emergency-fund-summary-row">
+                <div>
+                  <p className="emergency-fund-summary-label">
+                    Emergency Fund Required
+                  </p>
+
+                  <p className="emergency-fund-summary-detail">
+                    {emergencyFundMonths} months of recurring expenses
+                  </p>
+                </div>
+
+                <strong>
+                  {formatCurrency(emergencyFundRequired)}
+                </strong>
+              </div>
+
+              <div className="emergency-fund-summary-row">
+                <div>
+                  <p className="emergency-fund-summary-label">
+                    Savings Above Target
+                  </p>
+
+                  <p className="emergency-fund-summary-detail">
+                    Current savings minus protected emergency fund
+                  </p>
+                </div>
+
+                <strong
+                  className={
+                    emergencyFundDifference < 0
+                      ? "cash-flow-negative"
+                      : "cash-flow-positive"
+                  }
+                >
+                  {formatCurrency(emergencyFundDifference)}
+                </strong>
               </div>
             </div>
           </section>
