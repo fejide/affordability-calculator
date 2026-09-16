@@ -1488,3 +1488,74 @@ main {
 .calculator-form-field select:focus-visible {
   outline: none;
 }
+
+/* ========================================
+   Calculator - Emergency Fund Summary
+======================================== */
+
+.emergency-fund-summary {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(15, 23, 42, 0.1);
+  display: grid;
+  gap: 1.25rem;
+}
+
+.emergency-fund-summary-item {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.emergency-fund-summary-text {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.emergency-fund-summary-label {
+  margin: 0;
+  color: #1f2937;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.emergency-fund-summary-detail {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.emergency-fund-summary-value {
+  margin: 0;
+  flex-shrink: 0;
+  color: #1f2937;
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.savings-above-target-positive {
+  color: #18794e;
+}
+
+.savings-above-target-negative {
+  color: #b42318;
+}
+
+/* ========================================
+   Emergency Fund Summary - Mobile
+======================================== */
+
+@media (max-width: 600px) {
+  .emergency-fund-summary-item {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .emergency-fund-summary-value {
+    text-align: left;
+  }
+}

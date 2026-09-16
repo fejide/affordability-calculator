@@ -270,44 +270,44 @@ function CalculatorPage() {
             </div>
 
             <div className="emergency-fund-summary">
-              <div className="emergency-fund-summary-row">
-                <div>
-                  <p className="emergency-fund-summary-label">
-                    Emergency Fund Required
-                  </p>
+  <div className="emergency-fund-summary-item">
+    <div className="emergency-fund-summary-text">
+      <p className="emergency-fund-summary-label">
+        Emergency Fund Required
+      </p>
 
-                  <p className="emergency-fund-summary-detail">
-                    {emergencyFundMonths} months of recurring expenses
-                  </p>
-                </div>
+      <p className="emergency-fund-summary-detail">
+        {emergencyFundMonths} months of recurring expenses
+      </p>
+    </div>
 
-                <strong>
-                  {formatCurrency(emergencyFundRequired)}
-                </strong>
-              </div>
+    <strong className="emergency-fund-summary-value">
+      {formatCurrency(emergencyFundRequired)}
+    </strong>
+  </div>
 
-              <div className="emergency-fund-summary-row">
-                <div>
-                  <p className="emergency-fund-summary-label">
-                    Savings Above Target
-                  </p>
+  <div className="emergency-fund-summary-item">
+    <div className="emergency-fund-summary-text">
+      <p className="emergency-fund-summary-label">
+        Savings Above Target
+      </p>
 
-                  <p className="emergency-fund-summary-detail">
-                    Current savings minus protected emergency fund
-                  </p>
-                </div>
+      <p className="emergency-fund-summary-detail">
+        Current savings minus protected emergency fund
+      </p>
+    </div>
 
-                <strong
-                  className={
-                    emergencyFundDifference < 0
-                      ? "cash-flow-negative"
-                      : "cash-flow-positive"
-                  }
-                >
-                  {formatCurrency(emergencyFundDifference)}
-                </strong>
-              </div>
-            </div>
+    <strong
+      className={`emergency-fund-summary-value ${
+        emergencyFundDifference < 0
+          ? "savings-above-target-negative"
+          : "savings-above-target-positive"
+      }`}
+    >
+      {formatCurrency(emergencyFundDifference)}
+    </strong>
+  </div>
+</div>
           </section>
 
           <section className="calculator-panel">
