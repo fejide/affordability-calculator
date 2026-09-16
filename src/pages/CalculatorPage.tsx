@@ -23,6 +23,27 @@ function CalculatorPage() {
     Number(currentSavings || 0) -
     emergencyFundRequired;
 
+  const purchasePriceNumber =
+    Number(purchasePrice || 0);
+
+  const currentSavingsNumber =
+    Number(currentSavings || 0);
+
+  const savingsAfterPurchase =
+    currentSavingsNumber - purchasePriceNumber;
+
+  const savingsAboveTargetAfterPurchase =
+    savingsAfterPurchase - emergencyFundRequired;
+
+  const usesEmergencyFund =
+    purchasePriceNumber > 0 &&
+    savingsAfterPurchase < emergencyFundRequired;
+
+  const purchaseMonthsOfCashFlow =
+    monthlyRemaining > 0
+      ? purchasePriceNumber / monthlyRemaining
+      : 0;
+
   function formatCurrency(amount: number) {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
