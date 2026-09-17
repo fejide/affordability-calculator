@@ -361,20 +361,71 @@ if (hasPurchasePrice) {
 </div>
           </section>
 
-          <section className="calculator-panel">
-            <p className="calculator-panel-label">
-              Result
-            </p>
+         <section className="calculator-panel calculator-result-panel">
+  <p className="calculator-panel-label">
+    Result
+  </p>
 
-            <h3>
-              Your affordability result will appear here.
-            </h3>
+  <h3>{affordabilityStatus}</h3>
 
-            <p>
-              The final recommendation and financial impact
-              breakdown will go here.
-            </p>
-          </section>
+  <p className="calculator-result-message">
+    {affordabilityMessage}
+  </p>
+
+  {hasPurchasePrice && (
+    <div className="calculator-result-breakdown">
+      <div className="calculator-result-row">
+        <div>
+          <p className="calculator-result-row-label">
+            Savings After Purchase
+          </p>
+
+          <p className="calculator-result-row-detail">
+            Current savings minus purchase price
+          </p>
+        </div>
+
+        <strong>
+          {formatCurrency(savingsAfterPurchase)}
+        </strong>
+      </div>
+
+      <div className="calculator-result-row">
+        <div>
+          <p className="calculator-result-row-label">
+            Emergency Fund Remaining
+          </p>
+
+          <p className="calculator-result-row-detail">
+            Savings left above your protected target
+          </p>
+        </div>
+
+        <strong>
+          {formatCurrency(savingsAboveTargetAfterPurchase)}
+        </strong>
+      </div>
+
+      <div className="calculator-result-row">
+        <div>
+          <p className="calculator-result-row-label">
+            Cash-Flow Equivalent
+          </p>
+
+          <p className="calculator-result-row-detail">
+            Purchase price compared with monthly remaining cash flow
+          </p>
+        </div>
+
+        <strong>
+          {hasPositiveCashFlow
+            ? `${purchaseMonthsOfCashFlow.toFixed(1)} months`
+            : "Unavailable"}
+        </strong>
+      </div>
+    </div>
+  )}
+</section>
         </div>
       </section>
     </main>
