@@ -1787,3 +1787,139 @@ main {
   margin: 0 auto 1rem;
   text-align: center !important;
 }
+
+/* =========================================================
+   STEP 7F PART 4C — INTERACTIVE INVESTMENT CONTROLS
+   ========================================================= */
+
+/* Container for both investment controls */
+
+.opportunity-cost-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+
+  width: 100%;
+  max-width: 560px;
+
+  margin: 2rem auto;
+  text-align: left;
+}
+
+/* Individual investment control */
+
+.opportunity-cost-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+
+  min-width: 0;
+}
+
+/* Input labels */
+
+.opportunity-cost-field label {
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.4;
+  color: #253247;
+}
+
+/* Input container */
+
+.opportunity-cost-input {
+  display: flex;
+  align-items: center;
+
+  width: 100%;
+  min-height: 52px;
+
+  padding: 0 1rem;
+
+  background: #ffffff;
+  border: 1px solid #dce2e8;
+  border-radius: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Highlight the container when its input is selected */
+
+.opportunity-cost-input:focus-within {
+  border-color: #5278a3;
+  box-shadow: 0 0 0 4px rgba(82, 120, 163, 0.12);
+}
+
+/* Number inputs */
+
+.opportunity-cost-input input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+
+  padding: 0;
+
+  background: transparent;
+  border: none;
+  outline: none;
+
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: #253247;
+}
+
+/* Remove browser number-input arrows */
+
+.opportunity-cost-input input::-webkit-inner-spin-button,
+.opportunity-cost-input input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.opportunity-cost-input input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+/* Percentage and years indicators */
+
+.opportunity-cost-input span {
+  flex-shrink: 0;
+
+  margin-left: 0.75rem;
+
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* Supporting descriptions */
+
+.opportunity-cost-field>p {
+  margin: 0;
+
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .opportunity-cost-controls {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+
+    max-width: 100%;
+    margin: 1.75rem auto;
+  }
+
+  .opportunity-cost-input {
+    min-height: 50px;
+  }
+}
