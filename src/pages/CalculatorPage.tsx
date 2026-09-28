@@ -40,9 +40,41 @@ function CalculatorPage() {
     savingsAfterPurchase < emergencyFundRequired;
 
   const purchaseMonthsOfCashFlow =
-    monthlyRemaining > 0
-      ? purchasePriceNumber / monthlyRemaining
-      : 0;
+  monthlyRemaining > 0
+    ? purchasePriceNumber / monthlyRemaining
+    : 0;
+
+
+// =========================================================
+// STEP 7F PART 1 — OPPORTUNITY COST CALCULATION
+// =========================================================
+
+// Assumed annual investment return: 7%
+const assumedAnnualReturn = 0.07;
+
+// Assumed investment period: 10 years
+const opportunityCostYears = 10;
+
+// Calculate the future value of investing the purchase price.
+const opportunityCostFutureValue =
+  purchasePriceNumber *
+  Math.pow(
+    1 + assumedAnnualReturn,
+    opportunityCostYears
+  );
+
+// Calculate the potential investment growth.
+const opportunityCostGrowth =
+  opportunityCostFutureValue - purchasePriceNumber;
+
+// These values will be displayed in Step 7F Part 2.
+void opportunityCostFutureValue;
+void opportunityCostGrowth;
+
+
+// =========================================================
+// EXISTING AFFORDABILITY STATUS LOGIC
+// =========================================================
 
 const hasPurchasePrice =
   purchasePriceNumber > 0;
