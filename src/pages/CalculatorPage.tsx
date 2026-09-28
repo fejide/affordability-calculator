@@ -40,71 +40,45 @@ function CalculatorPage() {
     savingsAfterPurchase < emergencyFundRequired;
 
   const purchaseMonthsOfCashFlow =
-  monthlyRemaining > 0
-    ? purchasePriceNumber / monthlyRemaining
-    : 0;
+    monthlyRemaining > 0
+      ? purchasePriceNumber / monthlyRemaining
+      : 0;
 
+  // Step 7F: Illustrative opportunity-cost projection.
+  const assumedAnnualReturn = 0.07;
+  const opportunityCostYears = 10;
+  const opportunityCostFutureValue =
+    purchasePriceNumber *
+    Math.pow(1 + assumedAnnualReturn, opportunityCostYears);
+  const opportunityCostGrowth =
+    opportunityCostFutureValue - purchasePriceNumber;
 
-// =========================================================
-// STEP 7F PART 1 — OPPORTUNITY COST CALCULATION
-// =========================================================
+  const hasPurchasePrice = purchasePriceNumber > 0;
+  const hasPositiveCashFlow = monthlyRemaining > 0;
 
-// Assumed annual investment return: 7%
-const assumedAnnualReturn = 0.07;
+  let affordabilityStatus = "Enter your numbers";
+  let affordabilityMessage =
+    "Add your purchase price, monthly finances, and savings to see your result.";
 
-// Assumed investment period: 10 years
-const opportunityCostYears = 10;
-
-// Calculate the future value of investing the purchase price.
-const opportunityCostFutureValue =
-  purchasePriceNumber *
-  Math.pow(
-    1 + assumedAnnualReturn,
-    opportunityCostYears
-  );
-
-// Calculate the potential investment growth.
-const opportunityCostGrowth =
-  opportunityCostFutureValue - purchasePriceNumber;
-
-// These values will be displayed in Step 7F Part 2.
-void opportunityCostFutureValue;
-void opportunityCostGrowth;
-
-
-// =========================================================
-// EXISTING AFFORDABILITY STATUS LOGIC
-// =========================================================
-
-const hasPurchasePrice =
-  purchasePriceNumber > 0;
-
-const hasPositiveCashFlow =
-  monthlyRemaining > 0;
-
-let affordabilityStatus = "Enter your numbers";
-let affordabilityMessage =
-  "Add your purchase price, monthly finances, and savings to see your result.";
-
-if (hasPurchasePrice) {
-  if (!hasPositiveCashFlow) {
-    affordabilityStatus = "Not affordable right now";
-    affordabilityMessage =
-      "Your recurring expenses are using all or more of your monthly income. Improving your monthly cash flow should come before making this purchase.";
-  } else if (usesEmergencyFund) {
-    affordabilityStatus = "High financial impact";
-    affordabilityMessage =
-      "This purchase would reduce your savings below the emergency-fund target you selected.";
-  } else if (purchaseMonthsOfCashFlow > 3) {
-    affordabilityStatus = "Proceed with caution";
-    affordabilityMessage =
-      "You can make this purchase without touching your protected emergency fund, but it represents more than three months of your current remaining cash flow.";
-  } else {
-    affordabilityStatus = "Within your current plan";
-    affordabilityMessage =
-      "Based on the information entered, this purchase stays above your protected emergency fund and fits within your current positive cash flow.";
+  if (hasPurchasePrice) {
+    if (!hasPositiveCashFlow) {
+      affordabilityStatus = "Not affordable right now";
+      affordabilityMessage =
+        "Your recurring expenses are using all or more of your monthly income. Improving your monthly cash flow should come before making this purchase.";
+    } else if (usesEmergencyFund) {
+      affordabilityStatus = "High financial impact";
+      affordabilityMessage =
+        "This purchase would reduce your savings below the emergency-fund target you selected.";
+    } else if (purchaseMonthsOfCashFlow > 3) {
+      affordabilityStatus = "Proceed with caution";
+      affordabilityMessage =
+        "You can make this purchase without touching your protected emergency fund, but it represents more than three months of your current remaining cash flow.";
+    } else {
+      affordabilityStatus = "Within your current plan";
+      affordabilityMessage =
+        "Based on the information entered, this purchase stays above your protected emergency fund and fits within your current positive cash flow.";
+    }
   }
-}
 
   function formatCurrency(amount: number) {
     return new Intl.NumberFormat("en-US", {
@@ -393,72 +367,87 @@ if (hasPurchasePrice) {
 </div>
           </section>
 
-         <section className="calculator-panel calculator-result-panel">
-  <p className="calculator-panel-label">
-    Result
-  </p>
+          <section className="calculator-panel calculator-result-panel">
+            <p className="calculator-panel-label">Result</p>
+            <h3>{affordabilityStatus}</h3>
+            <p className="calculator-result-message">{affordabilityMessage}</p>
 
-  <h3>{affordabilityStatus}</h3>
+            {hasPurchasePrice && (
+              <div className="calculator-result-breakdown">
+                <div className="calculator-result-row">
+                  <div>
+                    <p className="calculator-result-row-label">Savings After Purchase</p>
+                    <p className="calculator-result-row-detail">
+                      Current savings minus purchase price
+                    </p>
+                  </div>
+                  <strong>{formatCurrency(savingsAfterPurchase)}</strong>
+                </div>
 
-  <p className="calculator-result-message">
-    {affordabilityMessage}
-  </p>
+                <div className="calculator-result-row">
+                  <div>
+                    <p className="calculator-result-row-label">Emergency Fund Remaining</p>
+                    <p className="calculator-result-row-detail">
+                      Savings left above your protected target
+                    </p>
+                  </div>
+                  <strong>{formatCurrency(savingsAboveTargetAfterPurchase)}</strong>
+                </div>
 
-  {hasPurchasePrice && (
-    <div className="calculator-result-breakdown">
-      <div className="calculator-result-row">
-        <div>
-          <p className="calculator-result-row-label">
-            Savings After Purchase
-          </p>
-
-          <p className="calculator-result-row-detail">
-            Current savings minus purchase price
-          </p>
+                <div className="calculator-result-row">
+                  <div>
+                    <p className="calculator-result-row-label">Cash-Flow Equivalent</p>
+                    <p className="calculator-result-row-detail">
+                      Purchase price compared with monthly remaining cash flow
+                    </p>
+                  </div>
+                  <strong>
+                    {hasPositiveCashFlow
+                      ? `${purchaseMonthsOfCashFlow.toFixed(1)} months`
+                      : "Unavailable"}
+                  </strong>
+                </div>
+              </div>
+            )}
+          </section>
         </div>
 
-        <strong>
-          {formatCurrency(savingsAfterPurchase)}
-        </strong>
-      </div>
-
-      <div className="calculator-result-row">
-        <div>
-          <p className="calculator-result-row-label">
-            Emergency Fund Remaining
+        <section
+          className="opportunity-cost-section"
+          aria-labelledby="opportunity-cost-title"
+        >
+          <p className="section-eyebrow">Long-Term Impact</p>
+          <h2 id="opportunity-cost-title">What could this money become?</h2>
+          <p className="section-description">
+            Compare the purchase price with a hypothetical investment over
+            {` ${opportunityCostYears} years`} at a constant
+            {` ${(assumedAnnualReturn * 100).toFixed(0)}%`} annual return.
           </p>
 
-          <p className="calculator-result-row-detail">
-            Savings left above your protected target
+          {hasPurchasePrice ? (
+            <div className="opportunity-cost-breakdown">
+              <div className="opportunity-cost-row">
+                <span>Purchase Price</span>
+                <strong>{formatCurrency(purchasePriceNumber)}</strong>
+              </div>
+              <div className="opportunity-cost-row">
+                <span>Potential Investment Value</span>
+                <strong>{formatCurrency(opportunityCostFutureValue)}</strong>
+              </div>
+              <div className="opportunity-cost-row">
+                <span>Potential Investment Growth</span>
+                <strong>{formatCurrency(opportunityCostGrowth)}</strong>
+              </div>
+            </div>
+          ) : (
+            <p>Enter a purchase price to see the hypothetical projection.</p>
+          )}
+
+          <p className="opportunity-cost-disclaimer">
+            Illustration only. Actual investment returns vary; this estimate
+            excludes taxes, fees, and inflation and is not a guarantee.
           </p>
-        </div>
-
-        <strong>
-          {formatCurrency(savingsAboveTargetAfterPurchase)}
-        </strong>
-      </div>
-
-      <div className="calculator-result-row">
-        <div>
-          <p className="calculator-result-row-label">
-            Cash-Flow Equivalent
-          </p>
-
-          <p className="calculator-result-row-detail">
-            Purchase price compared with monthly remaining cash flow
-          </p>
-        </div>
-
-        <strong>
-          {hasPositiveCashFlow
-            ? `${purchaseMonthsOfCashFlow.toFixed(1)} months`
-            : "Unavailable"}
-        </strong>
-      </div>
-    </div>
-  )}
-</section>
-        </div>
+        </section>
       </section>
     </main>
   );
