@@ -63,7 +63,6 @@ function CalculatorPage() {
     annualReturn,
     investmentYears,
   ]);
-
 // =========================================================
 // STEP 7G PART 3A — RESET CALCULATOR
 // =========================================================
@@ -72,7 +71,6 @@ function handleResetCalculator() {
     "Reset the calculator? This will clear all of your current inputs."
   );
   if (!shouldReset) return;
-
   setPurchaseName("");
   setPurchasePrice("");
   setMonthlyIncome("");
@@ -81,15 +79,12 @@ function handleResetCalculator() {
   setEmergencyFundMonths("6");
   setAnnualReturn("7");
   setInvestmentYears("10");
-
   try {
     localStorage.removeItem("affordability-calculator-inputs");
   } catch (error) {
     console.error("Unable to clear saved calculator inputs:", error);
   }
 }
-  void handleResetCalculator; // Step 7G Part 3B will connect this to the reset button.
-
 const monthlyRemaining =
     Number(monthlyIncome || 0) -
     Number(monthlyExpenses || 0);
@@ -432,6 +427,16 @@ const hasPurchasePrice = purchasePriceNumber > 0;
               </div>
             )}
           </section>
+        </div>
+        {/* STEP 7G PART 3B — RESET CALCULATOR BUTTON */}
+        <div className="calculator-reset-container">
+          <button
+            type="button"
+            className="calculator-reset-button"
+            onClick={handleResetCalculator}
+          >
+            Reset Calculator
+          </button>
         </div>
         <section
           className="opportunity-cost-section"
