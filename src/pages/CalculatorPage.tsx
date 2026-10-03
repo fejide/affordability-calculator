@@ -118,29 +118,52 @@ const monthlyRemaining =
   const opportunityCostGrowth =
     opportunityCostFutureValue - purchasePriceNumber;
 const hasPurchasePrice = purchasePriceNumber > 0;
-  const hasPositiveCashFlow = monthlyRemaining > 0;
-  let affordabilityStatus = "Enter your numbers";
-  let affordabilityMessage =
-    "Add your purchase price, monthly finances, and savings to see your result.";
-  if (hasPurchasePrice) {
-    if (!hasPositiveCashFlow) {
-      affordabilityStatus = "Not affordable right now";
-      affordabilityMessage =
-        "Your recurring expenses are using all or more of your monthly income. Improving your monthly cash flow should come before making this purchase.";
-    } else if (usesEmergencyFund) {
-      affordabilityStatus = "High financial impact";
-      affordabilityMessage =
-        "This purchase would reduce your savings below the emergency-fund target you selected.";
-    } else if (purchaseMonthsOfCashFlow > 3) {
-      affordabilityStatus = "Proceed with caution";
-      affordabilityMessage =
-        "You can make this purchase without touching your protected emergency fund, but it represents more than three months of your current remaining cash flow.";
-    } else {
-      affordabilityStatus = "Within your current plan";
-      affordabilityMessage =
-        "Based on the information entered, this purchase stays above your protected emergency fund and fits within your current positive cash flow.";
-    }
+
+// =========================================================
+// STEP 7H PART 1 — REQUIRED INPUTS
+// =========================================================
+// Empty fields must not be treated as confirmed zero-dollar values.
+const hasRequiredFinancialInputs =
+  purchasePrice.trim() !== "" &&
+  monthlyIncome.trim() !== "" &&
+  monthlyExpenses.trim() !== "" &&
+  currentSavings.trim() !== "";
+
+const hasPositiveCashFlow = monthlyRemaining > 0;
+
+let affordabilityStatus = "Enter your numbers";
+
+let affordabilityMessage =
+  "Add your purchase price, monthly finances, and savings to see your result.";
+
+if (hasPurchasePrice && !hasRequiredFinancialInputs) {
+  affordabilityStatus = "Complete your financial picture";
+
+  affordabilityMessage =
+    "Enter your purchase price, monthly income, monthly expenses, and current savings before we evaluate affordability.";
+} else if (hasRequiredFinancialInputs) {
+  if (!hasPositiveCashFlow) {
+    affordabilityStatus = "Not affordable right now";
+
+    affordabilityMessage =
+      "Your recurring expenses are using all or more of your monthly income. Improving your monthly cash flow should come before making this purchase.";
+  } else if (usesEmergencyFund) {
+    affordabilityStatus = "High financial impact";
+
+    affordabilityMessage =
+      "This purchase would reduce your savings below the emergency-fund target you selected.";
+  } else if (purchaseMonthsOfCashFlow > 3) {
+    affordabilityStatus = "Proceed with caution";
+
+    affordabilityMessage =
+      "You can make this purchase without touching your protected emergency fund, but it represents more than three months of your current remaining cash flow.";
+  } else {
+    affordabilityStatus = "Within your current plan";
+
+    affordabilityMessage =
+      "Based on the information entered, this purchase stays above your protected emergency fund and fits within your current positive cash flow.";
   }
+}
   function formatCurrency(amount: number) {
     return new Intl.NumberFormat("en-US", {
       style: "currency",
@@ -391,7 +414,7 @@ const hasPurchasePrice = purchasePriceNumber > 0;
             <p className="calculator-panel-label">Result</p>
             <h3>{affordabilityStatus}</h3>
             <p className="calculator-result-message">{affordabilityMessage}</p>
-            {hasPurchasePrice && (
+            {hasPurchasePrice && hasRequiredFinancialInputs && (
               <div className="calculator-result-breakdown">
                 <div className="calculator-result-row">
                   <div>
