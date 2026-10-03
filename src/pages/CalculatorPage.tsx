@@ -117,6 +117,7 @@ const monthlyRemaining =
     Math.pow(1 + assumedAnnualReturn, opportunityCostYears);
   const opportunityCostGrowth =
     opportunityCostFutureValue - purchasePriceNumber;
+const hasPurchasePriceInput = purchasePrice.trim() !== "";
 const hasPurchasePrice = purchasePriceNumber > 0;
 
 // =========================================================
@@ -129,19 +130,39 @@ const hasRequiredFinancialInputs =
   monthlyExpenses.trim() !== "" &&
   currentSavings.trim() !== "";
 
+// =========================================================
+// STEP 7H PART 2A — FINANCIAL NUMBER VALIDATION
+// =========================================================
+const financialValuesAreValid =
+  Number.isFinite(Number(purchasePrice)) &&
+  Number(purchasePrice) >= 0 &&
+  Number.isFinite(Number(monthlyIncome)) &&
+  Number(monthlyIncome) >= 0 &&
+  Number.isFinite(Number(monthlyExpenses)) &&
+  Number(monthlyExpenses) >= 0 &&
+  Number.isFinite(Number(currentSavings)) &&
+  Number(currentSavings) >= 0;
+
 const hasPositiveCashFlow = monthlyRemaining > 0;
+
+
 
 let affordabilityStatus = "Enter your numbers";
 
 let affordabilityMessage =
   "Add your purchase price, monthly finances, and savings to see your result.";
 
-if (hasPurchasePrice && !hasRequiredFinancialInputs) {
+if (hasPurchasePriceInput && !hasRequiredFinancialInputs) {
   affordabilityStatus = "Complete your financial picture";
 
   affordabilityMessage =
     "Enter your purchase price, monthly income, monthly expenses, and current savings before we evaluate affordability.";
-} else if (hasRequiredFinancialInputs) {
+} else if (hasRequiredFinancialInputs && !financialValuesAreValid) {
+  affordabilityStatus = "Check your numbers";
+
+  affordabilityMessage =
+    "Financial amounts cannot be negative. Enter zero or a positive number for each financial field.";
+} else if (hasRequiredFinancialInputs && financialValuesAreValid) {
   if (!hasPositiveCashFlow) {
     affordabilityStatus = "Not affordable right now";
 
@@ -414,7 +435,9 @@ if (hasPurchasePrice && !hasRequiredFinancialInputs) {
             <p className="calculator-panel-label">Result</p>
             <h3>{affordabilityStatus}</h3>
             <p className="calculator-result-message">{affordabilityMessage}</p>
-            {hasPurchasePrice && hasRequiredFinancialInputs && (
+            {hasPurchasePrice &&
+  hasRequiredFinancialInputs &&
+  financialValuesAreValid && (
               <div className="calculator-result-breakdown">
                 <div className="calculator-result-row">
                   <div>
