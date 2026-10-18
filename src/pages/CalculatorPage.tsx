@@ -594,9 +594,7 @@ if (hasPurchasePriceInput && !hasRequiredFinancialInputs) {
     Enter a purchase price to see the hypothetical projection.
   </p>
 )}
-          ) : (
-            <p>Enter a purchase price to see the hypothetical projection.</p>
-          )}
+         
           <p className="opportunity-cost-disclaimer">
             Illustration only. Actual investment returns vary; this estimate
             excludes taxes, fees, and inflation and is not a guarantee.
