@@ -106,17 +106,10 @@ const monthlyRemaining =
     purchasePriceNumber > 0 &&
     savingsAfterPurchase < emergencyFundRequired;
   const purchaseMonthsOfCashFlow =
-    monthlyRemaining > 0
-      ? purchasePriceNumber / monthlyRemaining
-      : 0;
-  // Step 7F: Illustrative opportunity-cost projection.
-  const assumedAnnualReturn = Number(annualReturn) / 100;
-  const opportunityCostYears = Number(investmentYears);
-  const opportunityCostFutureValue =
-    purchasePriceNumber *
-    Math.pow(1 + assumedAnnualReturn, opportunityCostYears);
-  const opportunityCostGrowth =
-    opportunityCostFutureValue - purchasePriceNumber;
+  monthlyRemaining > 0
+    ? purchasePriceNumber / monthlyRemaining
+    : 0;
+
 const hasPurchasePriceInput = purchasePrice.trim() !== "";
 const hasPurchasePrice = purchasePriceNumber > 0;
 
@@ -133,6 +126,8 @@ const hasRequiredFinancialInputs =
 // =========================================================
 // STEP 7H PART 2A — FINANCIAL NUMBER VALIDATION
 // =========================================================
+
+
 const financialValuesAreValid =
   Number.isFinite(Number(purchasePrice)) &&
   Number(purchasePrice) >= 0 &&
@@ -143,7 +138,45 @@ const financialValuesAreValid =
   Number.isFinite(Number(currentSavings)) &&
   Number(currentSavings) >= 0;
 
-const hasPositiveCashFlow = monthlyRemaining > 0;
+  // =========================================================
+// STEP 7H PART 2B — INVESTMENT ASSUMPTION VALIDATION
+// =========================================================
+
+const investmentInputsAreComplete =
+  annualReturn.trim() !== "" &&
+  investmentYears.trim() !== "";
+
+const investmentInputsAreValid =
+  investmentInputsAreComplete &&
+  Number.isFinite(Number(annualReturn)) &&
+  Number(annualReturn) >= 0 &&
+  Number(annualReturn) <= 30 &&
+  Number.isFinite(Number(investmentYears)) &&
+  Number(investmentYears) >= 1 &&
+  Number(investmentYears) <= 50;
+
+
+// =========================================================
+// STEP 7H PART 2B — VALIDATED INVESTMENT CALCULATIONS
+// =========================================================
+
+const assumedAnnualReturn = Number(annualReturn) / 100;
+
+const opportunityCostYears = Number(investmentYears);
+
+const opportunityCostFutureValue =
+  hasPurchasePrice && investmentInputsAreValid
+    ? purchasePriceNumber *
+      Math.pow(1 + assumedAnnualReturn, opportunityCostYears)
+    : 0;
+
+const opportunityCostGrowth =
+  hasPurchasePrice && investmentInputsAreValid
+    ? opportunityCostFutureValue - purchasePriceNumber
+    : 0;
+
+  
+  const hasPositiveCashFlow = monthlyRemaining > 0;
 
 
 
@@ -532,21 +565,35 @@ if (hasPurchasePriceInput && !hasRequiredFinancialInputs) {
               <p>Number of years the money could remain invested</p>
             </div>
           </div>
-          {hasPurchasePrice ? (
-            <div className="opportunity-cost-breakdown">
-              <div className="opportunity-cost-row">
-                <span>Purchase Price</span>
-                <strong>{formatCurrency(purchasePriceNumber)}</strong>
-              </div>
-              <div className="opportunity-cost-row">
-                <span>Potential Investment Value</span>
-                <strong>{formatCurrency(opportunityCostFutureValue)}</strong>
-              </div>
-              <div className="opportunity-cost-row">
-                <span>Potential Investment Growth</span>
-                <strong>{formatCurrency(opportunityCostGrowth)}</strong>
-              </div>
-            </div>
+          {hasPurchasePrice && investmentInputsAreValid ? (
+  <div className="opportunity-cost-breakdown">
+
+    <div className="opportunity-cost-row">
+      <span>Purchase Price</span>
+      <strong>{formatCurrency(purchasePriceNumber)}</strong>
+    </div>
+
+    <div className="opportunity-cost-row">
+      <span>Potential Investment Value</span>
+      <strong>{formatCurrency(opportunityCostFutureValue)}</strong>
+    </div>
+
+    <div className="opportunity-cost-row">
+      <span>Potential Investment Growth</span>
+      <strong>{formatCurrency(opportunityCostGrowth)}</strong>
+    </div>
+
+  </div>
+) : hasPurchasePrice ? (
+  <p>
+    Enter an annual return from 0% to 30% and an investment period
+    from 1 to 50 years to see the hypothetical projection.
+  </p>
+) : (
+  <p>
+    Enter a purchase price to see the hypothetical projection.
+  </p>
+)}
           ) : (
             <p>Enter a purchase price to see the hypothetical projection.</p>
           )}
