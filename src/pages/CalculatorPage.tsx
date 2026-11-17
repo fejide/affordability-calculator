@@ -111,7 +111,7 @@ const monthlyRemaining =
     : 0;
 
 const hasPurchasePriceInput = purchasePrice.trim() !== "";
-const hasPurchasePrice = purchasePriceNumber > 0;
+const hasPurchasePrice = hasPurchasePriceInput;
 
 // =========================================================
 // STEP 7H PART 1 — REQUIRED INPUTS
